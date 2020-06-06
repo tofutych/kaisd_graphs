@@ -1,40 +1,63 @@
-from tkinter import *
-import os
- 
-def but_open():
-    text_output.delete(1.0, END)
-    _path = "{}\\{}".format(os.getcwd(),text_input.get())
-    _in_path = open(_path,'r')
-    text_output.insert(INSERT,_in_path.read())
-    _in_path.close()
- 
-def but_save():
-    _save_path = "{}\\{}".format(os.getcwd(), text_input.get())
-    _out_path = open(_save_path, 'w')
-    _out_path.write(text_output.get(1.0, END))
-    _out_path.close()
-    text_output.delete(1.0, END)
- 
- 
+from tkinter import Tk, messagebox, Button, LEFT
+from euler import check_euler, add_graph
+
+
+def center(win):
+    win.update_idletasks()
+    width = win.winfo_width()
+    frm_width = win.winfo_rootx() - win.winfo_x()
+    win_width = width + 2 * frm_width
+    height = win.winfo_height()
+    titlebar_height = win.winfo_rooty() - win.winfo_y()
+    win_height = height + titlebar_height + frm_width
+    x = win.winfo_screenwidth() // 2 - win_width // 2
+    y = win.winfo_screenheight() // 2 - win_height // 2
+    win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+    win.deiconify()
+
+
+def inputText():
+    message = ''
+    for item in open('input.txt').read().splitlines():
+        message += '\t'.join(item.split()) + "\n"
+    messagebox._show('input.txt', message)
+
+
+def outputText():
+    message = ''
+    for item in open('output.txt').read().splitlines():
+        message += ' '.join(item.split()) + "\n"
+    messagebox._show('output.txt', message)
+
+
+def exec():
+    try:
+        check_euler(add_graph(input_path), max_node, output_path)
+        messagebox._show('Успех!', 'гатова')
+    except Exception:
+        messagebox._show("Варнинг!")
+
+
 root = Tk()
-root.geometry('600x600')
-root.minsize(width=200, height=100)
-active_frame = Frame(root)
- 
-text_input = Entry(active_frame, width='0')
-text_output = Text(width='1', wrap=NONE)
-scroll_ver = Scrollbar(command=text_output.yview)
-scroll_hor = Scrollbar(command=text_output.xview, orient=HORIZONTAL)
-text_output.config(yscrollcommand=scroll_ver.set, xscrollcommand=scroll_hor.set)
-button_open = Button(active_frame,text='Открыть', command=but_open)
-button_save = Button(active_frame,text='Сохранить', command=but_save)
- 
-text_input.pack(side=LEFT, expand=1, fill=X)
-button_open.pack(side=LEFT, padx=1)
-button_save.pack(side=LEFT, padx=1)
-active_frame.pack(side=TOP, fill=X, padx=17, pady=1)
-scroll_hor.pack(side=BOTTOM, fill=X)
-text_output.pack(expand=1, side=LEFT, fill=BOTH, anchor=S)
-scroll_ver.pack(side=RIGHT, fill=Y)
- 
+root.title('Euler')
+root.geometry('165x100')
+root.resizable(width=False, height=False)
+center(root)
+input_button = Button(root, text='input', command=inputText)
+output_button = Button(root, text='output', command=outputText)
+max_node = 10
+input_path = 'input.txt'
+output_path = 'output.txt'
+execute_button = Button(root, text='execute', command=exec)
+input_button.pack(side=LEFT, padx=5)
+output_button.pack(side=LEFT, padx=5)
+execute_button.pack(side=LEFT, padx=5)
 root.mainloop()
+
+
+# # вот он в input txt
+# G1 = {1: [2, 3, 4], 2: [1, 3], 3: [1, 2], 4: [1, 5], 5: [4]}
+
+# G2 = {1: [2, 3, 4, 5], 2: [1, 3], 3: [1, 2], 4: [1, 5], 5: [1, 4]}
+# G3 = {1: [2, 3, 4], 2: [1, 3, 4], 3: [1, 2], 4: [1, 2, 5], 5: [4]}
+# G4 = {1: [2, 3], 2: [1, 3], 3: [1, 2]}

@@ -62,31 +62,3 @@ def check_euler(graph, max_node, output_path):
         print("File error!")
     finally:
         file.close()
-
-
-def main():
-    # G1 = {1: [2, 3, 4], 2: [1, 3], 3: [1, 2], 4: [1, 5], 5: [4]}
-    # G2 = {1: [2, 3, 4, 5], 2: [1, 3], 3: [1, 2], 4: [1, 5], 5: [1, 4]}
-    # G3 = {1: [2, 3, 4], 2: [1, 3, 4], 3: [1, 2], 4: [1, 2, 5], 5: [4]}
-    # G4 = {1: [2, 3], 2: [1, 3], 3: [1, 2]}
-    # G5 = {
-    #     1: [],
-    #     2: []
-    #     # all degree is zero
-    # }
-    max_node = 10
-    input_path = 'input.txt'
-    output_path = 'output.txt'
-    check_euler(add_graph(input_path), max_node, output_path)
-    # print("\n\nG2")
-    # check_euler(G2, max_node)
-    # print("\n\nG3")
-    # check_euler(G3, max_node)
-    # print("\n\nG4")
-    # check_euler(G4, max_node)
-    # print("\n\nG5")
-    # check_euler(G5, max_node)
-
-
-if __name__ == "__main__":
-    main()
