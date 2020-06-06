@@ -19,9 +19,21 @@ def center(win):
     win.deiconify()
 
 
-if __name__ == "__main__":
+def main():
     root = Tk()
     root.title('Is Eulerian?')
     root.geometry('400x400')
     center(root)
     root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
+
+# from euler import check_euler, add_graph
+
+
+# max_node = 10
+# input_path = 'input.txt'
+# output_path = 'output.txt'
+# check_euler(add_graph(input_path), max_node, output_path)
