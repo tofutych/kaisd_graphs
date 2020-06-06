@@ -1,39 +1,40 @@
-from tkinter import Tk
-
-
-def center(win):
-    """
-    centers a tkinter window
-    :param win: the root or Toplevel window to center
-    """
-    win.update_idletasks()
-    width = win.winfo_width()
-    frm_width = win.winfo_rootx() - win.winfo_x()
-    win_width = width + 2 * frm_width
-    height = win.winfo_height()
-    titlebar_height = win.winfo_rooty() - win.winfo_y()
-    win_height = height + titlebar_height + frm_width
-    x = win.winfo_screenwidth() // 2 - win_width // 2
-    y = win.winfo_screenheight() // 2 - win_height // 2
-    win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
-    win.deiconify()
-
-
-def main():
-    root = Tk()
-    root.title('Is Eulerian?')
-    root.geometry('400x400')
-    center(root)
-    root.mainloop()
-
-
-if __name__ == "__main__":
-    main()
-
-# from euler import check_euler, add_graph
-
-
-# max_node = 10
-# input_path = 'input.txt'
-# output_path = 'output.txt'
-# check_euler(add_graph(input_path), max_node, output_path)
+from tkinter import *
+import os
+ 
+def but_open():
+    text_output.delete(1.0, END)
+    _path = "{}\\{}".format(os.getcwd(),text_input.get())
+    _in_path = open(_path,'r')
+    text_output.insert(INSERT,_in_path.read())
+    _in_path.close()
+ 
+def but_save():
+    _save_path = "{}\\{}".format(os.getcwd(), text_input.get())
+    _out_path = open(_save_path, 'w')
+    _out_path.write(text_output.get(1.0, END))
+    _out_path.close()
+    text_output.delete(1.0, END)
+ 
+ 
+root = Tk()
+root.geometry('600x600')
+root.minsize(width=200, height=100)
+active_frame = Frame(root)
+ 
+text_input = Entry(active_frame, width='0')
+text_output = Text(width='1', wrap=NONE)
+scroll_ver = Scrollbar(command=text_output.yview)
+scroll_hor = Scrollbar(command=text_output.xview, orient=HORIZONTAL)
+text_output.config(yscrollcommand=scroll_ver.set, xscrollcommand=scroll_hor.set)
+button_open = Button(active_frame,text='Открыть', command=but_open)
+button_save = Button(active_frame,text='Сохранить', command=but_save)
+ 
+text_input.pack(side=LEFT, expand=1, fill=X)
+button_open.pack(side=LEFT, padx=1)
+button_save.pack(side=LEFT, padx=1)
+active_frame.pack(side=TOP, fill=X, padx=17, pady=1)
+scroll_hor.pack(side=BOTTOM, fill=X)
+text_output.pack(expand=1, side=LEFT, fill=BOTH, anchor=S)
+scroll_ver.pack(side=RIGHT, fill=Y)
+ 
+root.mainloop()
