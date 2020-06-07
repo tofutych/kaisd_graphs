@@ -1,14 +1,8 @@
 def add_graph(path):
-    try:
-        file = open(path)
-        vertex = file.read().splitlines()
-        graph = {i + 1: list(map(int, vertex[i].split()))
-                 for i in range(0, len(vertex))}
-        return graph
-    except IOError:
-        print("File error!")
-    finally:
-        file.close()
+    vertex = open(path).read().splitlines()
+    graph = {i + 1: list(map(int, vertex[i].split()))
+             for i in range(0, len(vertex))}
+    return graph
 
 
 def dfs(u, graph, visited_edge, path=[]):
