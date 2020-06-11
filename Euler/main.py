@@ -1,5 +1,4 @@
-from tkinter import Tk, messagebox, Button, LEFT
-from euler import check_euler, add_graph
+from tkinter import *
 
 
 def center(win):
@@ -14,45 +13,6 @@ def center(win):
     y = win.winfo_screenheight() // 2 - win_height // 2
     win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
     win.deiconify()
-
-
-def inputText():
-    message = ''
-    for item in open('input.txt').read().splitlines():
-        message += '\t'.join(item.split()) + "\n"
-    messagebox._show('input.txt', message)
-
-
-def outputText():
-    message = ''
-    for item in open('output.txt').read().splitlines():
-        message += ' '.join(item.split()) + "\n"
-    messagebox._show('output.txt', message)
-
-
-def exec():
-    try:
-        check_euler(add_graph(input_path), max_node, output_path)
-        messagebox._show('Успех!', 'гатова')
-    except Exception:
-        messagebox._show("Варнинг!")
-
-
-root = Tk()
-root.title('Euler')
-root.geometry('165x100')
-root.resizable(width=False, height=False)
-center(root)
-input_button = Button(root, text='input', command=inputText)
-output_button = Button(root, text='output', command=outputText)
-max_node = 10
-input_path = 'input.txt'
-output_path = 'output.txt'
-execute_button = Button(root, text='execute', command=exec)
-input_button.pack(side=LEFT, padx=5)
-output_button.pack(side=LEFT, padx=5)
-execute_button.pack(side=LEFT, padx=5)
-root.mainloop()
 
 
 # # вот он в input txt
