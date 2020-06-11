@@ -36,7 +36,7 @@ def check_euler(graph, max_node, output_path):
                     for _ in range(max_node + 1)]
     check, odd_node = check_circuit_or_path(graph, max_node)
     try:
-        file = open(output_path, 'a')
+        file = open(output_path, 'w')
         if check == 3:
             file.write("Graph is not Eulerian!\nno path\n")
             return
