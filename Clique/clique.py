@@ -127,7 +127,7 @@ for j in range(2, size):
 print(cliques)
 
 root = tkinter.Tk()
-root.title('IsEulerian?')
+root.title('Max clique')
 root.geometry('400x400')
 root.resizable(False, False)
 center(root)
